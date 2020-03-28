@@ -1,0 +1,167 @@
+﻿@model AidatPro.Models.KasaBakiyeModel
+
+@{
+    ViewBag.Title = "Hesap";
+}
+
+<!-- Date-time picker css -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
+<!-- Date-range picker css  -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/bower_components/bootstrap-daterangepicker/css/daterangepicker.css">
+<!-- Date-Dropper css -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/bower_components/datedropper/css/datedropper.min.css">
+
+<form id="myForms">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header contact-user">
+                    Yeni Kasa bilgilerini ekleyin.
+                </div>
+                <div class="card-block">
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-2 col-form-label">Bakiye</label>
+                        <div class="col-sm-8">                           
+                            <div class="input-group input-group-info">
+                                <span onclick="borcEkle()" class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Borç Ekle">
+                                    <i class="icofont icofont-cur-turkish-lira"></i>
+                                </span>
+                                <input type="number" name="Bakiye" id="borcs" required="" placeholder="Lütfen bakiyeyi girin" class="form-control form-control-info">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-2 col-form-label">Kasa</label>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(x => x.KasaId, new SelectList(ViewBag.KasaListe, "Id", "KasaAd"), new { @class = "js-example-basic-single", id = "persid" })
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-2 col-form-label">Tarih</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="dropper-default" name="Tarih" required="" class="form-control form-control-info">
+                            <span class="form-bar"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-radio row col-md-12">
+                        <div class="col-sm-2 col-form-label">İşlem Türü</div>
+                        <div class="col-sm-1">
+                            <div class="radio radiofill radio-success radio-inline">
+                                <label>
+                                    <input type="radio" name="selector" checked="checked" value="true">
+                                    <i class="helper"></i>Gelir
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="radio radiofill radio-danger radio-inline">
+                                <label>
+                                    <input type="radio" name="selector">
+                                    <i class="helper"></i>Gider
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-12">
+                        <div class="col-sm-7"></div>
+                        <div class="col-sm-3">
+                            <span id="clickUpdate" onclick="fncKaydet()" class="form-control btn btn-info float-sm-right"><i class="icofont icofont-info-square"></i>Kaydet</span>
+                        </div>
+                    </div>
+                    <div class="card-block groups-contact">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+
+    <script src="~/Theme/files/bower_components/select2/js/select2.full.min.js"></script>
+    <script src="~/Theme/files/assets/pages/advance-elements/select2-custom.js"></script>
+
+    <!-- Bootstrap date-time-picker js -->
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+    <!-- Date-range picker js -->
+    <script type="text/javascript" src="~/Theme/files/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="~/Theme/files/bower_components/datedropper/js/datedropper.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/custom-picker.js"></script>
+
+}
+
+
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Yeni kayıt tamamlandı mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#myForms").valid()) {
+                    $.ajax({
+                        url: '@Url.Action("CreateHesap", "Hesap")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Kayıt Eklendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Kasa/Kasa_Listesi';
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                Bakiye: {
+                    required: true
+                },
+                Tarih: {
+                    required: true
+                }
+            }
+        });
+    });
+
+</script>

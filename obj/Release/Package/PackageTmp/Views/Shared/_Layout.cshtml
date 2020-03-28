@@ -1,0 +1,355 @@
+﻿@using Microsoft.AspNet.Identity
+@using AidatPro.Framework;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="#">
+    <meta name="keywords" content="site aidat takip, apartman yönetimi , aidat, aylık takip, apartman, aidat uygulama, yazılım, aidat programı, mobil aidat takip, apartman, site, apartman aidatları">
+    <meta name="author" content="#">
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Theme/files/assets/images/favs.png" type="image/png">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+   
+    <link href="~/Theme/files/assets/icon/themify-icons/themify-icons.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/icon/icofont/css/icofont.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/icon/feather/css/feather.css" rel="stylesheet" />
+
+
+    @Styles.Render("~/Content/myStyle")
+    @RenderSection("Styles", required: false)
+
+    @{
+
+        var routeData = ViewContext.RouteData;
+
+        var routeAction = (string)routeData.Values["action"];
+
+        var routeController = (string)routeData.Values["controller"];
+    }
+
+</head>
+
+<body>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+                <div class="ring">
+                    <div class="frame"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+
+            <nav class="navbar header-navbar pcoded-header" header-theme="theme6">
+                <div class="navbar-wrapper">
+
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu"></i>
+                        </a>
+                        <a href="@Url.Action("Panel","Panel")">
+                            <img class="img-fluid" src="/Theme/files/assets/images/logo.png" alt="Theme-Logo">
+                        </a>
+                        <a class="mobile-options">
+                            <i class="feather icon-more-horizontal"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-addon search-close"><i class="feather icon-x"></i></span>
+                                        <input type="text" class="form-control">
+                                        <span class="input-group-addon search-btn"><i class="feather icon-search"></i></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="feather icon-maximize full-screen"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="header-notification" style="margin-right:-25px !important;">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">                                        
+                                        @*<span class="badge bg-c-pink">5</span>*@
+                                    </div>
+                                    
+                                </div>
+                            </li>
+
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        @*<img src="~/Theme/files/assets/images/auth/user-profilee.png" class="img-radius" alt="User-Profile-Image">*@
+                                        <i class="icofont icofont-brand-live-messenger mr-2" style="font-size:15px;"></i>
+                                        <span>@User.Identity.GetUserName()</span>
+                                        <i class="feather icon-chevron-down"></i>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">                                    
+                                        <li>
+                                            <a href="@Url.Action("LogOf","Account")">
+                                                <i class="feather icon-log-out"></i> Çıkış
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Sidebar chat start -->
+            <!-- Sidebar inner chat start-->
+            <div class="showChat_inner">
+                
+            </div>
+            <!-- Sidebar inner chat end-->
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="pcoded-inner-navbar main-menu">
+                            <div class="pcoded-navigatio-lavel"></div>
+
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="@Html.IsActive("Panel")">
+                                    <a href="@Url.Action("Panel","Panel")">
+                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                        <span class="pcoded-mtext">Panel</span>
+                                    </a>
+                                </li>
+                                <li class="pcoded-hasmenu @Html.IsActive("Blok")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-building-alt"></i></span>
+                                        <span class="pcoded-mtext">Blok</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("Index","Blok")">
+                                                <span class="pcoded-mtext">Blok Listesi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("CreateBlok","Blok")">
+                                                <span class="pcoded-mtext">Yeni Blok</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="pcoded-hasmenu @Html.IsActive("Daire")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-home"></i></span>
+                                        <span class="pcoded-mtext">Daire</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("HesapListe","Daire")">
+                                                <span class="pcoded-mtext">Kullanıcılar</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("DaireAccount","Account")">
+                                                <span class="pcoded-mtext">Yeni Kullanıcı</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="pcoded-hasmenu @Html.IsActive("Demirbas")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-fix-tools"></i></span>
+                                        <span class="pcoded-mtext">Demirbaş</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("Index","Demirbas")">
+                                                <span class="pcoded-mtext">Demirbaş Listesi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("CreateDemirbas","Demirbas")">
+                                                <span class="pcoded-mtext">Yeni Demirbaş</span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="@Url.Action("TeslimEdilenDemir","Demirbas")">
+                                                <span class="pcoded-mtext">Teslimat</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="pcoded-hasmenu @Html.IsActive("Etkinlik")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-food-cart"></i></span>
+                                        <span class="pcoded-mtext">Etkinlik</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("Index","Etkinlik")">
+                                                <span class="pcoded-mtext">Etkinlik Listesi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("CreateEtkinlik","Etkinlik")">
+                                                <span class="pcoded-mtext">Yeni Etkinlik</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="pcoded-hasmenu @Html.IsActive("Hesap")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont icofont-bank-alt"></i></span>
+                                        <span class="pcoded-mtext">Hesap</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("CreateHesap","Hesap")">
+                                                <span class="pcoded-mtext">Yeni Hesap</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="pcoded-hasmenu @Html.IsActive("Kasa")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-briefcase-alt-2"></i></span>
+                                        <span class="pcoded-mtext">Kasa</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("Index","Kasa")">
+                                                <span class="pcoded-mtext">Kasa Listesi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("CreateKasa","Kasa")">
+                                                <span class="pcoded-mtext">Yeni Kasa</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="pcoded-hasmenu @Html.IsActive("Personel")">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-business-man"></i></span>
+                                        <span class="pcoded-mtext">Personel</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="@Url.Action("Index","Personel")">
+                                                <span class="pcoded-mtext">Personel Listesi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="@Url.Action("CreatePersonel","Personel")">
+                                                <span class="pcoded-mtext">Yeni Personel</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>                           
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-header start -->
+                                    <div class="card">
+                                        <div class="card-block caption-breadcrumb">
+                                            <div class="breadcrumb-header">
+                                                <h5>@ViewBag.Title</h5>
+                                                <span>@ViewBag.Desc</span>
+                                            </div>
+                                            <div class="page-header-breadcrumb">
+                                                <ul class="breadcrumb-title">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="/">
+                                                            <i class="icofont icofont-home" style="font-size:16px;"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="breadcrumb-item">
+                                                        <a href="@Url.Action("Index",routeController)">@routeController</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item">
+                                                        <a href="#!">@ViewBag.Title</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @RenderBody()
+                                </div>
+                            </div>
+                            @*<div id="styleSelector">
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/Scripts/myScript")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

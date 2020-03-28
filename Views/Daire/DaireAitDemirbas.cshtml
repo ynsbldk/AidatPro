@@ -1,0 +1,103 @@
+﻿@model IEnumerable<AidatPro.Models.DemirbasTeslimModel>
+@{
+    ViewBag.Title = "Teslim Edilen Demirbaş";
+    ViewBag.Desc = "Teslim edilen demirbaşlar aşağıdaki tabloda yer alıyor";
+
+}
+
+@Styles.Render("~/Content/dataTable")
+
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-block">
+        <h6>Aşağıda Daire'ye verilen demirbaşlar listelenmektedir.</h6>
+        <div class="dt-responsive table-responsive">
+            <table id="footer-search" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr class="thcol">
+                        <th>Demirbaş Ad</th>
+                        <th>Teslim Alan</th>
+                        <th>Teslim Eden</th>
+                        <th>Tarih</th>
+                        <th class="serc">Eylem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="colum">
+                            <td> <a href="@Url.Action("DemirbasDetay","Demirbas",new {id=item.Demirs.Id})">@item.Demirs.DemirbasAd</a></td>
+                            <td>@item.TeslimAlan</td>
+                            <td>@item.TeslimEden</td>
+                            <td>@item.EklenmeTarih.ToString("dddd, dd MMMM yyyy")</td>
+                            <td class="serc text-center">
+                                <a href="#" onclick="deleteOrder(@item.Id)" class="btn btn-danger btn-sm"><i class="icofont icofont-ui-delete"></i> <span class="sil">Sil</span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/dataTable")
+
+<script>
+    $('#footer-search').DataTable({
+        dom: 'Bfrtip',
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+        },
+        "createdRow": function (row, data, dataIndex) {
+            $(row).addClass('redClass');
+        },
+        "pageLength": 5,
+        buttons: [
+        ]
+    });
+</script>
+
+<script>
+        function deleteOrder(id) {
+        Swal.fire({
+        title: "Uyarı",
+        text: "Seçtiğiniz Kayıt Silinsin mi?",
+        icon: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "SİL",
+            confirmButtonColor: "#ec6c62",
+        cancelButtonText: "Iptal",
+        }).then((result) => {
+        if (result.value) {
+        $.ajax({
+        url: '@Url.Action("DaireDemirbasTemizle", "Daire")',
+        data: { "gelenid": id },
+        type: "POST"
+        }).done(function (data) {
+        if (data) {
+        Swal.fire
+        ({
+        title: "Başarılı!",
+        text: "Kayıt Silindi",
+        icon: "success"
+        }).then(function () {
+        window.location.reload();
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Silinemedi", "error");
+        }
+        }).fail(function () {
+        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Silinemedi", "error");
+        }
+        });
+        }
+</script>

@@ -1,0 +1,338 @@
+﻿@model AidatPro.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Kayıt OL";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>@ViewBag.Title </title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="#">
+    <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="#">
+    <link rel="icon" href="~/Theme/files/assets/images/favs.png" type="image/png">
+
+    <link href="~/Theme/files/assets/icon/themify-icons/themify-icons.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/icon/icofont/css/icofont.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Theme/files/assets/icon/feather/css/feather.css" rel="stylesheet" />
+    @Styles.Render("~/Content/myStyle")
+    <link rel="stylesheet" type="text/css" href="/Theme/files/bower_components/sweetalert/css/sweetalert.css">
+    <style type="text/css">
+        .errors {
+            color: #b91d1d;
+        }
+    </style>
+
+
+</head>
+
+<body class="fix-menu">
+
+
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="ball-scale">
+            <div class='contain'>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+                <div class="ring"><div class="frame"></div></div>
+            </div>
+        </div>
+    </div>
+    <!-- Pre-loader end -->
+    <section class="login-block">
+        <!-- Container-fluid starts -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "md-float-material form-material", id = "myForm", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="text-center">
+                            <img src="~/Theme/files/assets/images/logo.png" alt="logo.png">
+                        </div>
+                        <div class="auth-box card">
+                            <div class="card-block">
+                                <div class="row m-b-20">
+                                    <div class="col-md-12">
+                                        <h3 class="text-center txt-primary">Yeni Hesap Oluştur</h3>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary()
+                                <div class="form-group row form-primary">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="Email" class="form-control" required="" placeholder="Email adresinizi girin">
+                                        <span class="form-bar"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group form-primary">
+                                    <input type="password" name="Password" class="form-control" id="password" required="" placeholder="Parolanızı girin">
+                                    <span class="form-bar"></span>
+                                </div>
+                                <div class="form-group form-primary">
+                                    <input type="password" name="ConfirmPassword" class="form-control" required="" placeholder="Tekrar parolanızı girin">
+                                    <span class="form-bar"></span>
+                                </div>
+
+                                <div class="row m-t-25 text-left">
+                                    <div class="col-md-12">
+                                        <div class="checkbox-fade fade-in-primary">
+                                            <label>
+                                                <input type="checkbox" name="Check" class="checkss" id="checks" value="">
+                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                <span class="text-inverse">Bütün <a href="#" data-toggle="modal" data-target="#Modal-overflow">Kurallar &amp; Sözleşmeleri</a> okudum</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkbox-fade fade-in-primary">
+                                            <label>
+                                                <input type="checkbox" value="">
+                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
+                                                <span class="text-inverse">Aylık bülteni gönder.</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-t-30">
+                                    <div class="col-md-12">
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Kaydol</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <p class="text-inverse text-left m-b-0">Teşekkür ederiz.</p>
+                                        <p class="text-inverse text-left"><a href="@Url.Action("Anasayfa","Home")"><b class="f-w-600">Siteye geri dön</b></a></p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img src="/Theme/files/assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                <!-- end of col-sm-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container-fluid -->
+    </section>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="../files/assets/images/browser/chrome.png" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="../files/assets/images/browser/firefox.png" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="../files/assets/images/browser/opera.png" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="../files/assets/images/browser/safari.png" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="../files/assets/images/browser/ie.png" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
+    </div>
+    <![endif]-->
+    <!-- Warning Section Ends -->
+
+
+    <div class="modal fade modal-flex" id="Modal-overflow" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body model-container">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="font-header">Kullanıcı Sözleşmesi</h5><br />
+                    <p>
+                        Madde 1. Taraflar
+                        İşbu Kullanıcı Sözleşmesi (“Sözleşme”), www.aidat-takip.com adresinde yer alan siteye (“Site”) kullanıcı (“Kullanıcı(lar)”) olarak kaydolan kişi arasında akdedilmektedir. Sözleşme, Kullanıcı tarafından elektronik ortamda kabulü ile birlikte yürürlüğe girecek olup; taraflarca Sözleşme’de belirtilen usuller doğrultusunda sona erdirilmediği sürece yürürlükte kalmaya devam edecektir.
+                        <br />
+                        Madde 2. Sözleşme’nin Konusu ve Kapsamı
+                        İşbu Sözleşme, Kullanıcı tarafından, Site üzerinden erişilen bulut tabanlı finans ve iş yönetimi uygulamasından (“Uygulama”) faydalanılmasına ve Kullanıcı tarafından Site’ye yüklenen verilere (“İçerik”) ilişkin koşul ve şartlar ile ilgili tarafların hak ve yükümlülüklerinin belirlenmesi amacıyla akdedilmektedir. Site kapsamında Site ve Uygulama’nın kullanımına ilişkin olarak Şirket tarafından Kullanıcılar’a sunulan kullanım koşulları, kural ve şartlar da işbu Sözleşme’nin eki ve ayrılmaz bir parçası niteliğinde olup burada yer alan hak ve yükümlülüklerle birlikte tarafların hak ve yükümlülüklerinin tamamını oluşturmaktadır.
+                        <br />
+                        Madde 3. Tarafların Hak ve Yükümlülükleri
+                        3.1 Kullanıcı, Uygulama’dan faydalanmak için Şirket tarafından talep edilen bilgileri tam, doğru ve güncel bir şekilde sağlayarak işbu Sözleşme’yi onaylaması gerektiğini bildiğini beyan eder. Kullanıcı statüsünün tesisi sırasında sağlanan bilgilerde herhangi bir değişiklik olması halinde, söz konusu bilgiler derhal güncellenecektir. Bu bilgilerin eksik veya gerçeğe aykırı olarak verilmesi ya da güncel olmaması nedeniyle Site ya da Uygulama’ya erişim sağlanamamasından ve bunlardan faydalanılamamasından Şirket sorumlu değildir.
+                        <br />
+                        3.2 Kullanıcı, 18 yaşını doldurmuş olduğunu ve işbu Sözleşme’yi akdetmek için gereken yasal ehliyete sahip bulunduğunu beyan eder. Kullanıcı’nın Site’ye bir işletme adına erişiyor olması halinde, Kullanıcı buna ilişkin gerekli yetkiyi haiz olduğunu kabul ve beyan eder. Bu durumda Kullanıcı statüsü ile hak ve yükümlülükler söz konusu işletmeye ait olacaktır.
+                        <br />
+                        3.3 Kullanıcı, tek bir Kullanıcı hesabı tesis etme hakkına sahip olup, Kullanıcı hesabının Şirket tarafından askıya alınması veya sona erdirilmesini takiben Kullanıcı tarafından aynı veya başka bilgiler kullanılarak ikinci bir hesap tesis edilmesi yasaktır. Şirket’in herhangi bir gerekçe göstermeksizin, tamamen kendi iradesine tabi olarak Kullanıcı hesabının açılmasını reddetme hakkı saklıdır.
+                        <br />
+                        3.4 Kullanıcı tarafından Site’ye erişim e-posta adresi ve şifresi kullanılarak gerçekleştirilecektir. Bu şifrenin gizliliğinin ve güvenliğinin korunmasından Kullanıcı sorumlu olacak olup Site üzerinden söz konusu bilgilerin kullanımı ile gerçekleştirilen her türlü faaliyetin Kullanıcı tarafından gerçekleştirildiği kabul edilecek, bu faaliyetlerden doğan her türlü yasal ve cezai sorumluluk Kullanıcı’ya ait olacaktır. Kullanıcı, şifresinin yetkisiz kullanımı veya güvenliğin başka şekilde ihlalinden haberdar olduğunda bu durumu derhal Şirket’e bildirecektir.
+                        <br />
+                        3.5 Kullanıcı, Uygulama’yı yalnızca yasalara uygun faaliyetleri için kullanacağını, işbu Sözleşme, ekleri, yürürlükteki mevzuat ve Uygulama’ya ilişkin olarak Site’de öngörülen diğer hüküm ve koşullara uygun davranacağını kabul ve taahhüt eder. Kullanıcı, Uygulama ve Site’yi üçüncü kişilere hizmet sunmak için yetkili olduğu sürece üçüncü kişi adına kullanabilecektir. Kullanıcı bu kapsamda, söz konusu kişilerin de işbu Sözleşme ve kendisi için geçerli olan diğer tüm hükümlere uygun davranmasını sağlayacaktır.
+                        <br />
+                        3.6 Kullanıcı, muhtelif zamanlarda Uygulama’yı kullanması için üçüncü bir kişiyi (“Yetkilendirilmiş Kullanıcı”) yetkilendirebilir. Yetkilendirilmiş Kullanıcı’nın kim olacağı ve Uygulama kapsamındaki yetki seviyesi Kullanıcı tarafından belirlenecektir. Kullanıcı, Yetkilendirilmiş Kullancılar’ın Uygulama’yı kullanmasından sorumlu olup Yetkilendirilmiş Kullanıcılar’ın Uygulama’ya erişimini her zaman kontrol edecek ve Yetkilendirilmiş Kullanıcı’nın Uygulama’ya erişim seviyesini her zaman ve bir nedene bağlı olmaksızın değiştirebilecek veya erişimini iptal edebilecektir. Kullanıcı ve Yetkilendirilmiş Kullanıcı arasında Uygulama’ya erişime ilişkin olarak bir uyuşmazlık çıkması halinde Yetkilendirilmiş Kullanıcı’nın Uygulama veya İçerik’e erişimi ve erişim seviyesine ilişkin kararı Kullanıcı verecektir.
+                        <br />
+                        3.7 Kullanıcı tarafından paylaşılan İçerik Kullanıcı’nın mülkiyetinde olup İçerik’e ilişkin tüm sorumluluk Kullanıcı’ya aittir. Şirket, işbu Sözleşme kapsamında Kullanıcı tarafından kendisine sağlanan lisans kapsamında İçerik’i kullanma hakkını haizdir. İçerik’e yahut İçerik’in yol açabileceği kayıp veya zararlara ilişkin olarak Şirket sorumlu tutulamayacak olup sayılanlarla sınırlı olmaksızın, hukuka uygunluk, İçerik’in doğruluğu, faturaların ödenmesi, tahsilatın yapılması, finansal işlemler ve vergi bildirimine ilişkin olarak Şirket’in hiçbir sorumluluğu bulunmamaktadır. Finansal işlemler, vergi ve diğer hususlar hakkında ilgili mevzuata uygunluğun sağlanması münhasıran Kullanıcı’nın sorumluluğundadır. Kullanıcı, Şirket’in finansal düzenlemeler başta olmak üzere, yürürlükteki mevzuattan kaynaklanan gereksinimlere dayanarak İçerik’i Uygulama’dan ve sistemlerinden silebileceğini ve Şirket’in kayıp veriler de dahil olmak üzere bu kapsamda meydana gelebilecek zararlardan sorumlu olmadığını kabul eder.
+                        <br />
+                        3.8 Kullanıcı, Şirket’in veya Uygulama’nın üçüncü kişiler tarafından barındırılıyor olması halinde bu üçüncü kişilerin bilgisayar ve ağ sistemlerinin güvenlik ve bütünlüğünü tehlikeye düşürecek faaliyetlerde bulunmayacağını, Uygulama’yı, Uygulama’nın, Site’nin veya hizmetlerin sunulduğu diğer sistemlerin işlerliğine yahut Uygulama ve Site’den faydalanan diğer kullanıcıların bunlardan faydalanmasına engel olacak veya bunlara zarar verecek şekilde veya hatalı kullanmamayı, Uygulama’nın barındırıldığı bilgisayar sistemlerine veya Uygulama’ya kendisine tanınan erişim kapsamı dışında yetkisiz erişim sağlamayacağını, Site’ye Şirket’in ve üçüncü kişilerin bilgisayar sistemlerine, cihazlarına ve yazılımlarına zarar verecek dosyalar veya hukuka aykırı İçerikler (Kullanıcı’nın üzerinde kullanma hakkı olmayan telif hakkıyla korunan veya ticari sır niteliğinde olan İçerikler ve diğer materyaller de dahil olmak üzere) aktarmayacağını ve yüklemeyeceğini, hizmetlerin sunulmasında veya Site’nin çalışmasında kullanılan bilgisayar programlarını olağan kullanım için mutlak olarak gerekli olmadığı sürece değiştirmeyeceğini, kopyalamayacağını, uyarlamayacağını, çoğaltmayacağını, kaynak kodu oluşturmayacağını yahut tersine mühendislik işlemleri yapmayacağını kabul ve taahhüt eder.
+                        <br />
+                        3.9 Kullanıcı, Uygulama’yı kullanmasının aylık işlem ve saklama hacimleri de dahil olmak üzere kısıtlamalara tabi olabileceğini kabul eder. Söz konusu kısıtlamalar Uygulama içinde belirtilecektir.
+                        <br />
+                        3.10 Kullanıcı, Uygulama’ya yüklenen İçerikler’in kopyalarını saklayacaktır. Şirket, veri kaybını önlemek için gerekli politika ve usullere uymakla beraber, İçerik’in kaybının söz konusu olmayacağına dair garanti vermemektedir. Şirket, nasıl ortaya çıktığına bakılmaksızın İçerik’in kaybından sorumlu değildir.
+                        <br />
+                        3.11 Şirket, Kullanıcı tarafından kendisi ile paylaşılan bilgi ve verileri işbu Sözleşme’ye ek niteliğinde olan “Gizlilik Politikası” kapsamında saklayacak ve kullanacaktır. Kullanıcı, Şirket’in yürürlükteki mevzuat uyarınca yetkili makamlardan talep gelmesi halinde Kullanıcı’nın kendisinde bulunan bilgilerini ilgili yetkili makamlarla paylaşabileceğini kabul eder. Bunun dışında Kullanıcı’ya ve Kullanıcı tarafından Site üzerinden gerçekleştirilen işlemlere ait bilgiler Kullanıcı’nın güvenliği, Şirket’in yükümlülüklerini ifa ve bazı istatistiki değerlendirmeler için kullanılabilecektir. Şirket ayrıca, fatura gönderme, ödeme bilgisi paylaşma gibi talep edilen hizmetleri sağlamak için İçerik’i diğer kullanıcılarla paylaşma hakkına sahiptir. Kullanıcı, diğer kullanıcılara ait İçerikler’i kullanmak istemesi halinde ilgili kullanıcıların onayını alacak ve söz konusu İçerikler’i diğer kullanıcı tarafından verilen onay kapsamında kullanacaktır. Bu bilgiler ayrıca bir veritabanı üzerinde tasnif edilip muhafaza edilebilecek ve Şirket, Kullanıcı’nın söz konusu kullanım ve işlem bilgilerini performans değerlendirmeleri, Şirket’in ve iş ortaklarının pazarlama kampanyaları, yıllık raporlar ve benzeri işlemler için bunlar için gerekli olan süre boyunca söz konusu verilerin anonim hale getirilmesini takiben kullanabilecektir. Kullanıcı, İçerik ve diğer bilgilerin Şirket veya üçüncü kişiler tarafından Türkiye’de veya yurt dışında bulunan veri merkezlerinde saklanabileceğini kabul eder.
+                        <br />
+                        3.12 Uygulama’ya ilişkin teknik sorunlar çıkması halinde Kullanıcı, Şirket’le iletişime geçemeden önce sorunu tespit ve teşhis etmek için makul çabayı sarf edecektir. Kullanıcı’nın teknik destek ihtiyacının devam etmesi halinde gerekli destek Site, Uygulama yahut diğer uygun kanallardan sağlanacaktır.
+                        <br />
+                        3.13 Kullanıcı’ya Site üzerinden iletişim araçları (forum, sohbet araçları veya mesaj merkezi gibi) sağlanması durumunda Kullanıcı bu iletişim araçlarını yalnızca hukuka uygun amaçlar çerçevesinde kullanacağını beyan ve taahhüt eder. Kullanıcı, söz konusu iletişim araçlarını ürün ve hizmet satışı, karşı tarafın rızası olmadan gönderilen e-postalar, üçüncü kişilerin yazılım ve bilgisayar sistemlerine zarar verebilecek dosyalar, diğer kullanıcılar bakımından hakaret içeren içerikler yahut hukuka aykırı her türlü içerik de dahil olmak üzere Uygulama amacı dışında materyaller paylaşmak için kullanmayacaktır. Kullanıcı, Site üzerinden gerçekleştirdiği her türlü iletişim bakımından bunu yapma yetkisini haiz olduğunu taahhüt eder. Şirket’in Site üzerinden gerçekleştirilen iletişimlerin uygunluğunu yahut bunların Uygulama’nın kullanım amaçlarına yönelik olduğunu kontrol etme yükümlülüğü bulunmamaktadır. Uygulama üzerinden erişilen veya Uygulama’ya ilişkin olarak kullanılan diğer web tabanlı iletişim araçları bakımından da Kullanıcı Site üzerinden sağlanan iletişim araçlarını kullanırken göstermekle yükümlü olduğu özeni gösterecektir. Şirket, Site üzerinden sağladığı iletişim araçlarını kendi takdirine bağlı olarak dilediği zaman kaldırma hakkına sahiptir.
+                        <br />
+                        3.14 Şirket, herhangi bir ön bildirimde bulunmaksızın işbu Sözleşme ve eklerini revize etme hakkına sahip olup bu hakkın kullanılması halinde ilgili değişiklik Kullanıcı tarafından Site’nin bir sonraki kullanımı ile birlikte yürürlüğe girecektir. Kullanıcı’nın söz konusu değişiklikleri kabul etmemesi halinde işbu Sözleşme’yi aşağıda belirtilen şekilde feshetme hakkı saklıdır.
+                        <br />
+                        3.15 Kullanıcı, Kullanıcı hesabını ve işbu Sözleşme ile Site kullanımından doğan hak ve yükümlülüklerini herhangi bir şekilde üçüncü bir kişiye devir veya temlik edemez.
+                        <br />
+                        3.16 Kullanıcı’nın işbu Sözleşme ve Site kapsamında yer alan diğer koşul ve şartlar ile bu kapsamdaki beyan ve taahhütlerine aykırı davranması halinde Şirket Kullanıcı’nın üyeliğini askıya alma veya Sözleşme’yi aşağıda belirtilen şekilde feshederek kullanıcı statüsünü bu şekilde sona erdirme hakkına sahip olacaktır. Böyle bir durumda Şirket’in söz konusu aykırılıktan doğan zararlarının Kullanıcı’dan talep hakkı saklıdır.
+                        <br />                
+
+                        Madde 4. Fikri Mülkiyet Hakları
+                        4.1 Site ve Uygulama üzerindeki her türlü hak, mülkiyet ve menfaat Şirket’e aittir. İşbu Sözleşme kapsamında Kullanıcı’ya Site ve Uygulama’yı kullanmak üzere kişiye özel, dünya çapında, telifsiz, devredilemez ve münhasır olmayan lisans verilmektedir. Sözleşme ve Site’ye ilişkin diğer koşullardaki hiçbir hüküm Site ve Uygulama’ya ilişkin hakların ve menfaatlerin Kullanıcı’ya devredildiği şeklinde yorumlanamaz. Kullanıcı, işbu Sözleşme kapsamında Şirket’e Kullanıcı’nın Uygulama’ya erişimi, Uygulama’yı kullanması ve hizmetlerin sağlanmasına yönelik diğer amaçlarla, bilgilerinin ve İçerik’in kullanılması, kopyalanması, iletilmesi, saklanması ve yedeğinin alınması için kullanım hakkı tanımaktadır. Şirket, hizmetlerin sağlanması amacıyla İçerik’e ilişkin olarak üçüncü kişi geliştiricilere alt lisans verme hakkını haizdir.
+                        <br />
+                        4.2 Kullanıcı, hiçbir şekilde ve nedenle Site’yi veya Uygulama’yı kopyalama, değiştirme, çoğaltma, ters mühendisliğe tabi tutma, geri derleme ve sair şekillerde Site üzerindeki yazılımın kaynak koduna ulaşma, Site’den işleme eser oluşturma hakkına sahip değildir. Site’ye ilişkin tarayıcı ve içeriklerin herhangi bir şekilde değiştirilmesi, Şirket’in açık izni olmaksızın Site’ye veya Site’den link verilmesi kesinlikle yasaktır.
+                        <br />
+                        4.3 Kullanıcı, herhangi bir şekilde Şirket’in (veya bağlı şirketlerinin) ticari unvanını, markasını, hizmet markasını, logosunu, alan adını vs. kullanmayacaktır.
+                        <br />
+                        Madde 5. Sorumluluğun Kısıtlanması
+                        5.1 Site kapsamındaki Uygulama, yazılım ve sair içerikler “OLDUĞU GİBİ” sunulmakta olup, bu kapsamda Şirket’in Uygulama, yazılım ve içeriğin doğruluğu, tamlığı ve güvenilirliği ile ilgili herhangi bir sorumluluk ya da taahhüdü bulunmamaktadır. Kullanıcı, Şirket’in ayrıca İçerik ve diğer Kullanıcı verilerinin birbiriyle ilişkisine dair taahhütte bulunmadığını anlar ve kabul eder. Şirket Uygulama’nın kullanımının kesintisiz ve hatasız olduğunu taahhüt etmemektedir. Şirket, Uygulama’nın 7/24 erişilebilir ve kullanılabilir olmasını hedeflemekle birlikte Uygulama’ya erişimi sağlayan sistemlerin işlerliği ve erişilebilirliğine ilişkin bir garanti vermemektedir. Kullanıcı, Uygulama’ya erişimin muhtelif zamanlarda engellenebileceğini ya da erişimin kesilebileceği kabul eder. Şirket, söz konusu engelleme veya kesintilerden hiçbir şekilde sorumlu değildir.
+                        <br />
+                        5.2 Kullanıcı, Site üzerinden Şirket’in kontrolünde olmayan başka internet sitelerine ve/veya portallara, dosyalara veya içeriklere link verilebileceğini ve bu tür linklerin yöneldiği internet sitesini veya işleten kişisini desteklemek amacıyla veya internet sitesi veya içerdiği bilgilere yönelik herhangi bir türde bir beyan veya garanti niteliği taşımadığını, söz konusu linkler vasıtasıyla erişilen portallar, internet siteleri, dosyalar ve içerikler, hizmetler veya ürünler veya bunların içeriği hakkında Şirket’in herhangi bir sorumluluğu olmadığını kabul ve beyan eder.
+                        <br />
+                        5.3 Kullanıcı, Site üzerinden sunulan Uygulama ve Uygulama’lara erişim ve bunların kalitesinin büyük ölçüde ilgili İnternet Servis Sağlayıcısı’ndan temin edilen hizmetin kalitesine dayandığını ve söz konusu hizmet kalitesinden kaynaklı sorunlarda Şirket’in herhangi bir sorumluluğunun bulunmadığını kabul eder.
+                        <br />
+                        5.4 Kullanıcı, yüklediği içerikler ile site ve Uygulama’nın kullanımından münhasıran sorumludur. Kullanıcı, fikri mülkiyet ihlalleri, içerik, Uygulama ve Site’nin kullanımına ilişkin olarak üçüncü kişiler tarafından iletilebilecek her türlü iddia ve talepten (yargılama masrafları ve avukatlık ücretleri de dahil olmak üzere) Şirket’i beri kıldığını kabul eder.
+                        <br />
+                        5.5 Şirket, uygulanacak hukukun izin verdiği ölçüde, kar kaybı, şerefiye ve itibar kaybı, ikame ürün ve hizmet temini için yapılan harcama gibi kalemler de dahil ancak bunlarla sınırlı olmaksızın Site’nin kullanımı neticesinde meydana gelen hiçbir doğrudan, dolaylı, özel, arızi, cezai zarardan sorumlu olmayacaktır. Buna ek olarak Şirket, zımni garanti, ticarete elverişlilik, belli bir amaca uygunluk da dahil ancak bunlarla sınırlı olmamak üzere, açık veya zımni hiçbir türlü garanti vermediğini de ayrıca beyan eder. Şirket’in işbu Sözleşme kapsamındaki sorumluluğu her halükarda ilgili zararın doğduğu tarihe kadar kullanıcı tarafından işbu Sözleşme’ye konu hizmetler kapsamında ödenmiş olan tutarla sınırlı olacaktır.
+                        <br />
+                        Madde 7. Sözleşme’nin Yürürlüğü ve Feshi
+                        6.1 İşbu Sözleşme Kullanıcı tarafından elektronik ortamda kabulü ile birlikte yürürlüğe girecek ve taraflardan herhangi biri tarafından aşağıda belirtilen şekilde feshedilmediği sürece yürürlükte kalacaktır.
+                        <br />
+                        6.2 Taraflardan herhangi biri, diğer tarafça bildirilen elektronik posta adresine 1 (bir) hafta önceden yapacağı yazılı bir bildirimle işbu Sözleşme’yi dilediği zaman herhangi bir gerekçe göstermeksizin ve tazminat ödemeksizin feshedebilecektir.
+                        <br />
+                        6.3 Taraflar’dan birinin işbu Sözleşme’den kaynaklanan yükümlülüklerini tam ve gereği gibi yerine getirmemesi ve diğer tarafça yapılacak yazılı bildirime karşın söz konusu aykırılığın verilen süre içerisinde giderilmemesi halinde bu Sözleşme bildirimi yapan tarafça feshedilebilecektir. Bahsi geçen aykırılığın Kullanıcı tarafından gerçekleştirilmesi halinde Şirket aykırılık giderilene kadar Kullanıcı statüsünü askıya alma hakkına sahip olacaktır. Kullanıcı’nın yürürlükteki mevzuatı ihlal etmesi halinde Şirket Sözleşme’yi derhal geçerli olacak şekilde haklı nedenle feshedebilecektir.
+                        <br />
+                        6.4 Sözleşme’nin feshi Taraflar’ın fesih tarihine kadar doğmuş olan hak ve yükümlülüklerini ortadan kaldırmayacaktır. Sözleşme’nin feshi ile birlikte Kullanıcı, o güne kadar doğmuş olan tüm ücret ve masraflardan sorumlu olup fesih tarihi itibariyle Site ve Uygulama’yı kullanamayacaktır. Ön ödemeli üyeliklerin feshi halinde Kullanıcı’ya para iadesi yapılmaz.
+                        <br />
+                        6.5 Kullanıcı’nın hesabının 3 (üç) ay boyunca pasif olması halinde Şirket işbu Sözleşme’yi feshedebilecektir.
+                        <br />
+                        6.6 Kullanıcı hesabının yasal nedenlerle engellenmiş olmadığı ve Sözleşme’nin feshedildiği hallerde Şirket İçerik’e 6 (altı) ay boyunca salt okunur erişim sağlayacaktır.
+                        <br />
+                        Madde 8. Muhtelif Hükümler
+                        7.1 İşbu Sözleşme’nin herhangi bir hükmünün veya sözleşmede yer alan herhangi bir ifadenin geçersizliği, yasaya aykırılığı ve uygulanamazlığı, Sözleşme’nin geri kalan hükümlerinin yürürlüğünü ve geçerliliğini etkilemeyecektir.
+                        <br />
+                        7.2 İşbu Sözleşme ekleri ile bir bütündür. Sözleşme ile ekleri arasında herhangi bir çelişki olması halinde, ilgili eklerde yer alan hükümler geçerli olacaktır.
+                        <br />
+                        7.3 Kullanıcı ile kayıt olurken bildirdikleri e-mail vasıtasıyla veya Site’de yer alan genel bilgilendirme aracılığıyla iletişim kurulacaktır. E-mail ile yapılan iletişim yazılı iletişimin yerini tutar. E-mail adresini güncel tutmak ve Site’yi bilgilendirmeler için düzenli kontrol etmek Kullanıcı’nın sorumluluğundadır.
+                        <br />
+                        7.4 İşbu Sözleşme ve eklerinden kaynaklı uyuşmazlıklarda Konya Merkez Mahkemeleri ve İcra Daireleri geçerli olacaktır.
+                    </p>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/myScript")
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/messages_tr.js"></script>
+
+    <!-- sweet alert js -->
+    <script type="text/javascript" src="/Theme/files/bower_components/sweetalert/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/Theme/files/assets/js/modal.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            $('#myForm').validate({ // initialize the plugin
+
+                errorClass: 'errors',
+                rules: {
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    ConfirmPassword: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+
+
+            $('#myForm').on('submit', function (e) {
+                if ($('input[class^="checkss"]:checked').length === 0) {
+                    swal("Sözleşme!", "Lütfen sözleşmeyi okuyunuz")
+                    e.preventDefault();
+                }
+            });
+
+        });
+    </script>
+
+    @if (TempData["UserMessage"] != null)
+    {
+        <script>
+            swal("Hata!", "Böyle bir kullanıcı zaten var")
+        </script>
+
+    }
+
+</body>
+
+</html>

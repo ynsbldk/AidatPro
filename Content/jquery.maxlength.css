@@ -1,0 +1,20 @@
+/* Styles for Max Length plugin v2.0.1 */
+
+.maxlength-disabled {
+	opacity: 0.5;
+}
+
+.maxlength-feedback {
+	position: relative;			
+	color: #fff;
+	background-color: #2DCEE3;	
+	float:right;
+	border-radius:2px;
+	width:48px;
+	font-size:14px;
+	margin-right:5px;
+	padding:3px;
+	text-align:center;
+	border-top:30px;
+
+}

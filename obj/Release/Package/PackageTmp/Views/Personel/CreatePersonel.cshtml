@@ -1,0 +1,180 @@
+﻿@model AidatPro.Models.PersonelModel
+
+@{
+    ViewBag.Title = "Yeni Personel";
+    ViewBag.Desc = "Aşağıdaki personel bilgilerinizi girin.";
+}
+
+<style type="text/css">
+    .errors {
+        color: #b91d1d;
+    }
+</style>
+
+<!-- Date-time picker css -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
+<!-- Date-range picker css  -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/bower_components/bootstrap-daterangepicker/css/daterangepicker.css">
+<!-- Date-Dropper css -->
+<link rel="stylesheet" type="text/css" href="~/Theme/files/bower_components/datedropper/css/datedropper.min.css">
+
+<form id="myForms" class="md-float-material form-material">
+    <div class="card">
+        <div class="card-header">
+            <h5>Yeni personel oluşturun.</h5>
+            <span>
+            </span>
+        </div>
+        <div class="card-block">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Personel Adı</label>
+                <div class="col col-sm-7">
+                    <input type="text" name="PersonelAd" required="" class="form-control form-control-info">
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Telefon</label>
+                <div class="col col-sm-7">
+                    <input type="text" name="Telefon" required="" class="form-control form-control-info">
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">E-Mail</label>
+                <div class="col col-sm-7">
+                    <input type="email" name="PersonelMail" required="" class="form-control form-control-info">
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">İş Başlangıcı</label>
+                <div class="col col-sm-7">
+                    <input type="text" id="dropper-default" required="" name="IsBaslangicTarih" class="form-control form-control-info">
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Görev</label>
+                <div class="col col-sm-7">
+                    <input type="text" name="PersonelGorev" required="" class="form-control form-control-info">
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label mt-3">Sorumlu Blok</label>
+                <div class="col col-sm-7">
+                    @Html.DropDownListFor(x => x.SorumluBlokId, new SelectList(ViewBag.blokDropdown, "Id", "BlokAd"), new { @class = "js-example-basic-single" })
+                    <span class="form-bar"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-4">
+                    <span id="clickUpdate" onclick="fncKaydet()" class="form-control btn btn-info float-sm-right"><i class="icofont icofont-info-square"></i>Kaydet</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+
+    <script src="~/Theme/files/bower_components/select2/js/select2.full.min.js"></script>
+    <script src="~/Theme/files/assets/pages/advance-elements/select2-custom.js"></script>
+
+    <!-- Bootstrap date-time-picker js -->
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+    <!-- Date-range picker js -->
+    <script type="text/javascript" src="~/Theme/files/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="~/Theme/files/bower_components/datedropper/js/datedropper.min.js"></script>
+    <script type="text/javascript" src="~/Theme/files/assets/pages/advance-elements/custom-picker.js"></script>
+
+
+
+}
+
+
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Yeni kayıt tamamlandı mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#myForms").valid()) {
+                    $.ajax({
+                        url: '@Url.Action("CreatePersonel", "Personel")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Kayıt Eklendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Personel/Personel_Listesi';
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                PersonelAd: {
+                    required: true
+                },
+                PersonelMail: {
+                    required: true
+                },
+                PersonelGorev: {
+                    required: true
+                },
+                IsBaslangicTarih: {
+                    required: true
+                }
+            }
+        });
+    });
+
+</script>

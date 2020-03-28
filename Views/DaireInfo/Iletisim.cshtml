@@ -1,0 +1,146 @@
+﻿@model AidatPro.Models.DaireMailModel
+
+<link href="~/Theme/files/bower_components/sweetalert/sweetalert2.css" rel="stylesheet" />
+
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                </div>
+                <div class="col-lg-8">
+                    <form class="form-contact contact_form" id="contactForm">
+                        <input type="hidden" value="@ViewBag.Yonetim" id="txtId" name="Acc" />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+
+                                    <textarea class="form-control w-100" name="Mesaj" id="Mesaj" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mesajınızı yazınız'" placeholder='Mesajınızı yazınız'></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="Telefon" id="Telefon" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Telefon'" placeholder='Telefon'>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="GonderenAd" id="GonderenAd" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" placeholder='Email'>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="Konu" id="Konu" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Konu'" placeholder='Konu'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <span onclick="fncKaydet()" class="button button-contactForm btn_4 boxed-btn">Gönder</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-home"></i></span>
+                        <div class="media-body">
+                            <h3>@ViewBag.Sahip</h3>
+                            <p>Ev Sahibi</p>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                        <div class="media-body">
+                            <h3>@ViewBag.Telefon</h3>
+                            <p>Telefon</p>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <h3>@ViewBag.Email</h3>
+                            <p>E-Mail</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Theme/files/bower_components/sweetalert/sweetalert2.all.js"></script>
+
+
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Mesaj Gönderilsin mi?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#contactForm").valid()) {                    
+                    $.ajax({
+                        url: '@Url.Action("Iletisim", "DaireInfo")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Gönderildi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Gönderilemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Gönderilemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#contactForm').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                GonderenAd: {
+                    required: true
+                },
+                Mesaj: {
+                    required: true                    
+                }
+            }
+        });
+
+
+    });
+
+</script>

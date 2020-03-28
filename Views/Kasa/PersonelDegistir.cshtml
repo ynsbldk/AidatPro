@@ -1,0 +1,78 @@
+﻿@model AidatPro.Models.KasaModel
+
+<input type="hidden" value="@Model.Id" id="kasaid" />
+<!-- Modal static-->
+<div class="modal fade" id="default-Modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title">Personel Seçiniz</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.DropDownListFor(x => x.SorumluPersonelId, new SelectList(ViewBag.perskDropdown, "Id", "PersonelAd"), new { @class = "form-control form-control-inverse", id = "perssid" })
+
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Kapat</button>
+                <span onclick="degistir()" class="btn btn-info btn-outline-info">Kaydet</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<script type="text/javascript">
+
+            function degistir () {
+                Swal.fire({
+                    title: "Uyarı",
+                    text: "Kayıt Tamamlandı mı?",
+                    icon: "question",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Evet",
+                    confirmButtonColor: "#ec6c62",
+                    cancelButtonText: "Iptal",
+                }).then((result) => {
+                    if (result.value) {
+                        var gid = $("#perssid").val();
+                        var tid = $("#kasaid").val();
+                        $.ajax({
+                            url: '@Url.Action("PersonelDegistir", "Kasa")',
+                            type: "POST",
+                            cache: false,
+                            data: { "id": gid,"kasaid":tid},
+                            traditional: true
+                        }).done(function (data) {
+                            if (data) {
+                                Swal.fire
+                                    ({
+                                        title: "Başarılı!",
+                                        text: "Kayıt Eklendi",
+                                        icon: "success"
+                                    }).then(function () {
+                                        window.location.href = '/Kasa/Kasa_detayı?id=' + @Model.Id;
+                                    });
+                            }
+                               else {
+        Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+        }
+        }).fail(function () {
+        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+        }
+        });
+        }
+</script>

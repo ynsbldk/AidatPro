@@ -1,0 +1,86 @@
+﻿@using AidatPro.Models;
+
+@model IEnumerable<BlokModel>
+
+@{
+    ViewBag.Title = "Blok Listesi";
+    ViewBag.Desc = "Aşağıda tüm bloklar listelenmektedir.";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-4 col-xs-12">
+            <div class="card statustic-card">
+                <div class="card-header">
+                    <div class="btn-group dropdown-split-info">
+                        <a href="@Url.Action("BlokAitDaire","Blok",new {id=item.Id})" class="btn btn-info"><i class="icofont icofont-info-square"></i>Detay</a>
+                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle primary</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item waves-effect waves-light" href="@Url.Action("Sorumlu","Blok",new {id=item.Id })">Sorumlu</a>
+                            <a class="dropdown-item waves-effect waves-light" href="#" onclick="deleteOrder(@item.Id)">Sil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-block text-center">
+                    <span class="d-block text-c-blue f-36">@item.BlokAd</span>
+                    <p class="m-b-0">Total</p>
+                </div>
+                <div class="card-footer bg-c-blue">
+                    <h6 class="text-white m-b-0">Toplam Daire : @item.DaireSayi</h6>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+
+    <script>
+        function deleteOrder(id) {
+        Swal.fire({
+        title: "Uyarı",
+        text: "Seçtiğiniz Kayıt Silinsin mi?",
+        icon: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "SİL",
+            confirmButtonColor: "#ec6c62",
+        cancelButtonText: "Iptal",
+        }).then((result) => {
+        if (result.value) {
+        $.ajax({
+        url: '@Url.Action("DeleteBlok", "Blok")',
+        data: { "blokId": id },
+        type: "POST"
+        }).done(function (data) {
+        if (data) {
+        Swal.fire
+        ({
+        title: "Başarılı!",
+        text: "Kayıt Silindi",
+        icon: "success"
+        }).then(function () {
+        window.location.href = '/Blok/Blok_Listesi';
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Silinemedi", "error");
+        }
+        }).fail(function (data) {
+        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Silinemedi", "error");
+        }
+        });
+        }
+    </script>
+
+}

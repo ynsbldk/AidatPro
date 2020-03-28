@@ -1,0 +1,145 @@
+﻿@model AidatPro.Models.DemirbasModel
+@{
+    ViewBag.Title = "Demirbas Güncelle";
+}
+
+<form id="myForms" data-toggle="validator">
+    <input type="hidden" value="@Model.Id" name="Id" />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header contact-user">
+                    Demirbaş bilgilerini düzenleyin.
+                </div>
+                <div class="card-block">
+
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Ad</label>
+                        <div class="col-sm-5">
+                            <input type="text" value="@Model.DemirbasAd" name="DemirbasAd" required="" class="form-control form-control-info">
+                        </div>
+                        <label class="col-sm-1 col-form-label">Fiyat</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="Fiyat" value="@Model.Fiyat" class="form-control form-control-info">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Adet</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="Adet" value="@Model.Adet" required="" class="form-control form-control-info">
+                        </div>
+                        <label class="col-sm-1 col-form-label">Kg</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="Kg" value="@Model.Kg" class="form-control form-control-info">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Alış Tarihi</label>
+                        <div class="col-sm-5">
+                            <input type="date" id="datePicker" name="AlisTarih" value="@string.Format("{0:yyyy-MM-dd}",Model.AlisTarih)" required="" class="form-control form-control-info">
+                        </div>
+                        <label class="col-sm-1 col-form-label"></label>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Açıklama</label>
+                        <div class="col-sm-12">
+                            <textarea rows="4" name="Aciklama" cols="10" class="form-control form-control-info">@Model.Aciklama</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-12">
+                        <div class="col-md-8"></div>
+                        <div class="col-sm-4">
+                            <input id="clickUpdate" onclick="fncKaydet()" class="form-control btn btn-info float-sm-right" value="Kaydet">
+                        </div>
+                    </div>
+                    <div class="card-block groups-contact">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Düzenleme tamamlandı mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#myForms").valid()) {
+                    $.ajax({
+                        url: '@Url.Action("DemirbasUpdate", "Demirbas")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Kayıt Düzenlendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Demirbaşlar/demirbaş_detay?id=' +@Model.Id;
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Kayıt Düzenlenemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Kayıt Düzenlenemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                DemirbasAd: {
+                    required: true
+                },
+                Adet: {
+                    required: true
+                },
+                AlisTarih: {
+                    required: true
+                },
+
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+

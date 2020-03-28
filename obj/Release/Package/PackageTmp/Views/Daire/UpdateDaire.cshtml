@@ -1,0 +1,145 @@
+﻿@model AidatPro.Models.DaireModel
+
+@{
+    var selectList = new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem {Text = "Ev Sahibi", Value = "Ev Sahibi"},
+            new SelectListItem {Text = "Kiralık", Value = "Kiralık"},
+                }, "Value", "Text");
+}
+
+<form id="myForms">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header contact-user">
+                    Daire bilgilerini düzenleyin.
+                </div>
+                <div class="card-block">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Daire No</label>
+                        <div class="col-sm-5">
+                            <input type="text" value="@Model.DaireNo" name="DaireNo" class="form-control">
+                        </div>
+                        <label class="col-sm-1 col-form-label">Daire Adı</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="DaireAd" required="" value="@Model.DaireAd" class="form-control">
+                            <span class="form-bar"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Sahibi</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="Sahip" value="@Model.Sahip" class="form-control">
+                        </div>
+                        <label class="col-sm-1 col-form-label">Telefon</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="Telefon" required="" value="@Model.Telefon" class="form-control">
+                            <span class="form-bar"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">E-Mail</label>
+                        <div class="col-sm-5">
+                            <input type="email" name="EMail" value="@Model.EMail" class="form-control">
+                        </div>
+                        <label class="col-sm-1 col-form-label">Hane Üyesi</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="HaneUye" value="@Model.HaneUye" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Ev Durumu</label>
+                        @Html.DropDownListFor(m => m.EvSahibi, selectList, "Seçiniz", new { @class = "form-control col-sm-4 ml-3" })
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-1 col-form-label">Not</label>
+                        <div class="col-sm-12">
+                            <textarea rows="4" name="Notlar" cols="10" class="form-control">@Model.Notlar</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <div class="col-md-8"></div>
+                        <div class="col-sm-4">
+                            <input class="form-control btn btn-info btn-outline-info w-50 float-sm-right" value="Kaydet" onclick="clickUptade()" id="clickUpdate">
+                        </div>
+                    </div>
+                    <div class="card-block groups-contact">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                DaireAd: {
+                    required: true
+                },
+                Telefon: {
+                    required: true
+                }
+            }
+        });
+    });
+
+            function clickUptade() {
+                Swal.fire({
+                    title: "Uyarı",
+                    text: "Düzenleme tamamlandı mı?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Evet",
+                    confirmButtonColor: "#ec6c62"
+                }).then((result) => {
+                    if (result.value && $("#myForms").valid()) {
+                        $.ajax({
+                            url: '@Url.Action("UpdateDaire", "Daire")',
+                            type: "POST",
+                            cache: false,
+                            data: $('form').serialize(),
+                            traditional: true
+                        }).done(function (data) {
+                            if (data) {
+                                Swal.fire
+                                    ({
+                                        title: "Başarılı!",
+                                        text: "Kayıt Düzenlendi",
+                                        icon: "success"
+                                    }).then(function () {
+                                        window.location.href = '/Daire/tekil_daire?id=' + @Model.Id;
+                                    });
+                            }
+                            else {
+                                Swal.fire("Oops", "Kayıt Düzenlenemedi", "error");
+                            }
+                        }).fail(function (data) {
+                            Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                        });
+                    }
+                    else {
+                        Swal.fire("Oops", "Kayıt Düzenlenemedi", "error");
+                    }
+                });
+
+        };
+</script>
+
+
+
+
+
+

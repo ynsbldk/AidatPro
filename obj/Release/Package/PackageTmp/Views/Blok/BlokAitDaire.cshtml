@@ -1,0 +1,162 @@
+﻿@model IEnumerable<AidatPro.Models.DaireModel>
+@{
+    ViewBag.Title = "Daireler";
+    ViewBag.Desc = "Aşağıda seçtiğiniz blok'a ait daireler listelenmektedir.";
+}
+
+<style>
+    .icofont-home {
+        font-size: 65px;
+    }
+</style>
+
+<form id="myForm">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+
+            <div class="input-group input-group-info">
+                <span class="input-group-addon">
+                    <i class="icofont icofont-ui-search"></i>
+                </span>
+                <input type="text" onkeyup="filter(this)" class="form-control" placeholder="Daire Ara">
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">           
+            <div class="input-group input-group-info">
+                <span onclick="borcEkle()" class="input-group-addon" data-toggle="tooltip" data-placement="top" data-original-title="Borç Ekle">
+                    <i class="icofont icofont-cur-turkish-lira"></i>
+                </span>
+                <input type="number" name="Borc" id="borcs" placeholder="Seçilen Dairelere Borç Ekle" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button type="button" data-toggle="tooltip" data-placement="top" data-original-title="Tümünü Seç" id="checkAll" class="btn btn-info btn-outline-info btn-sm"><i class="fa fa-check-circle" style="font-size:18px;"></i></button>
+            <button type="button" data-toggle="tooltip" data-placement="top" data-original-title="Seçimi İptal Et" id="uncheckAll" class="btn btn-info btn-outline-info btn-sm"><i class="fa fa-times" style="font-size:18px;"></i></button>
+
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row simple-cards users-card">
+            @foreach (var item in Model)
+            {
+                <input type="hidden" value="@item.BlokId" id="blokId" />
+                <div class="col-md-4 arama">
+                    <div class="card user-card">
+                        <div class="card-header-img">
+                            <div class="border-checkbox-section">
+                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                    <input class="border-checkbox" type="checkbox" id="@item.DaireAd" value="@item.DaireId">
+                                    <label class="border-checkbox-label" for="@item.DaireAd">Seç</label>
+                                </div>
+                            </div>
+                            <i class="icofont icofont-home"></i>
+                            <h4><span>Daire Adı:</span> @item.DaireAd</h4>
+                            <h5> <span>E-Mail:</span> @item.EMail</h5>
+                            <h6><span>Sahip:</span> @item.Sahip</h6>
+                        </div>
+                        <div>                            
+                            <a href="@Url.Action("SingleDaire", "Daire", new { id = item.Id })" class="btn btn-info btn-outline-info btn-sm"><i class="icofont icofont-user m-r-5"></i>Profil</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</form>
+
+
+
+
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $('#checkAll').click(function () {
+                $('input:checkbox').each(function () {
+                    $(this).prop('checked', true);
+                })
+            });
+            $('#uncheckAll').click(function () {
+                $('input:checkbox').each(function () {
+                    $(this).prop('checked', false);
+                })
+            });
+        });
+
+    </script>
+
+    <script>
+        function filter(e) {
+            search = e.value.toLowerCase();
+            console.log(e.value)
+            document.querySelectorAll('.arama').forEach(function (card) {
+                text = card.innerText.toLowerCase();
+                if (text.match(search)) {
+                    card.style.display = "block"
+                } else {
+                    card.style.display = "none"
+                }
+            })
+        }
+    </script>
+
+
+
+    <script src="~/Theme/files/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+}
+
+<script>
+        function borcEkle() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Seçtiğiniz kayıtlara borç eklensin mi?",
+                icon: "question",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62"
+            }).then((result) => {
+                    if (result.value) {
+                        var borc = $('#borcs').val();
+                        var blokId = $('#blokId').val();
+                        var val = new Array();
+                        $(':checkbox:checked').each(function (i) {
+                            val[i] = $(this).val();
+                        });
+                        $.ajax({
+                            url: '@Url.Action("BlokAitDaire", "Blok")',
+                            type: "POST",
+                            cache: false,
+                            data: { "Borc": borc, "grade": val, "blokId": blokId },
+                            traditional: true
+                        }).done(function (data) {
+                            if (data) {
+                                Swal.fire
+                                    ({
+                                        title: "Eklendi!",
+                                        text: "Borç Eklendi",
+                                        icon: "success"
+                                    }).then(function () {
+                                        window.location.href = '/Blok/bloğunuza_ait_daire?id='+blokId;
+                                    })
+                            }
+                            else {
+                                Swal.fire("Oops", "Borç Eklenemedi", "error");
+                            }
+                        }).fail(function (data) {
+                            Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                        });
+                    }
+                    else {
+                        Swal.fire("Oops", "Borç Eklenemedi", "error");
+                        }
+                });
+                }
+
+
+</script>

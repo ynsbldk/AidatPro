@@ -1,0 +1,140 @@
+﻿@model IEnumerable<AidatPro.Models.PersonelModel>
+@{
+    ViewBag.Title = "Personel Listesi";
+    ViewBag.Desc = "Bu blok'taki tüm personel listelenmektedir.";
+}
+
+@section Styles{
+
+    @Styles.Render("~/Content/dataTable")
+
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<style>
+    .sil {
+        margin-left: 10px !important;
+    }
+
+    .btn-sm {
+        width: 100px !important;
+    }
+
+    .redClass {
+        background-color: white !important;
+    }
+
+    .columnStyle {
+        width: 80px;
+        padding: 5px;
+    }
+</style>
+<div class="card">
+    <div class="card-header">
+        <h5>Aşağıda ilgili Blok'a ait sorumlu personeller listelenmektedir.</h5>
+        
+    </div>
+    <div class="card-block">
+        <div class="dt-responsive table-responsive">
+            <table id="footer-search" class="table table-striped table-bordered nowrap">
+                <thead>
+                    <tr class="thcol">
+                        <th>Personel Adı</th>
+                        <th>E-Mail</th>
+                        <th>İş Başlangıcı</th>
+                        <th>Görev</th>
+                        <th class="serc">Eylem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="colum">
+                            <td> <a href="@Url.Action("SinglePersonel","Personel",new {id=item.Id})">@item.PersonelAd</a></td>
+                            <td>@item.PersonelMail</td>
+                            <td>@item.IsBaslangicTarih.ToString("dddd, dd MMMM yyyy")</td>
+                            <td>@item.PersonelGorev</td>
+                            <td class="text-center serc">
+                                <a href="#" class="btn btn-danger btn-sm text-center" onclick="deleteOrder(@item.Id)"><i class="icofont icofont-ui-delete"></i> <span class="sil">Sil</span></a>
+                             
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                   
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+@section Scripts{
+
+    @Scripts.Render("~/Scripts/dataTable")
+
+    <script>
+        $('#footer-search').DataTable({
+            dom: 'Bfrtip',
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+            },
+            "createdRow": function (row, data, dataIndex) {
+                $(row).addClass('redClass');
+            },
+            "pageLength": 5,
+            buttons: [
+                
+            ]
+
+        });
+
+
+    </script>
+    <script src="~/Scripts/printThis.js"></script>
+}
+
+<script>
+            function deleteOrder(id) {
+        Swal.fire({
+        title: "Uyarı",
+        text: "Personel'in görevi sonlandı mı?",
+        icon: "warning",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "SİL",
+        confirmButtonColor: "#ec6c62",
+        cancelButtonText: "Iptal",
+        }).then((result) => {
+        if (result.value) {
+        $.ajax({
+        url: '@Url.Action("SorumluIptal", "Blok")',
+        data: { "id": id },
+        type: "POST"
+        }).done(function (data) {
+        if (data) {
+        Swal.fire
+        ({
+        title: "Başarılı!",
+        text: "Görev Sonlandırıldı",
+        icon: "success"
+        }).then(function () {
+        window.location.href = '/Blok/Blok_Listesi';
+        });
+        }
+        else {
+        Swal.fire("Oops", "Görev Sonlandırılamadı", "error");
+        }
+        }).fail(function (data) {
+        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+        });
+        }
+        else {
+        Swal.fire("Oops", "Görev Sonlandırılamadı", "error");
+        }
+        });
+        }
+</script>

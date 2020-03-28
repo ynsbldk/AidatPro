@@ -1,0 +1,164 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Daire Yönetim</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="/Content/DaireTemp/site.webmanifest"> -->
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Theme/files/assets/images/favs.png" type="image/png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="/Content/DaireTemp/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/magnific-popup.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/themify-icons.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/nice-select.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/flaticon.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/gijgo.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/animate.min.css">
+    <link rel="stylesheet" href="/Content/DaireTemp/css/slicknav.css">
+
+    <link rel="stylesheet" href="/Content/DaireTemp/css/style.css">
+    <!-- <link rel="stylesheet" href="/Content/DaireTemp/css/responsive.css"> -->
+
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="/Content/DaireTemp/https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="#">
+                                        <img class="img-fluid" src="/Theme/files/assets/images/logo.png" alt="Theme-Logo">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="#section1">Anasayfa</a></li>
+                                            <li><a href="#section2">Borç</a></li>
+                                            <li><a href="#section3">Etkinlik</a></li>
+                                            <li><a href="#section4">Demirbaş</a></li>
+                                            <li><a href="#section5">Personel</a></li>
+                                            <li><a href="#section6">Iletişim</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="#">@ViewBag.Email</a>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="@Url.Action("LogOf","Account")">Çıkış Yap</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    @RenderBody()
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="copy-right_text wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".3s">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer end  -->
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <script src="/Content/DaireTemp/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/Content/DaireTemp/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/Content/DaireTemp/js/popper.min.js"></script>
+    <script src="/Content/DaireTemp/js/bootstrap.min.js"></script>
+    <script src="/Content/DaireTemp/js/owl.carousel.min.js"></script>
+    <script src="/Content/DaireTemp/js/isotope.pkgd.min.js"></script>
+    <script src="/Content/DaireTemp/js/ajax-form.js"></script>
+    <script src="/Content/DaireTemp/js/waypoints.min.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.counterup.min.js"></script>
+    <script src="/Content/DaireTemp/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/Content/DaireTemp/js/scrollIt.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.scrollUp.min.js"></script>
+    <script src="/Content/DaireTemp/js/wow.min.js"></script>
+    <script src="/Content/DaireTemp/js/nice-select.min.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.slicknav.min.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.magnific-popup.min.js"></script>
+    <script src="/Content/DaireTemp/js/plugins.js"></script>
+    <script src="/Content/DaireTemp/js/gijgo.min.js"></script>
+
+
+
+    <!--contact js-->
+    <script src="/Content/DaireTemp/js/contact.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.form.js"></script>
+    <script src="/Content/DaireTemp/js/jquery.validate.min.js"></script>
+    <script src="/Content/DaireTemp/js/mail-script.js"></script>
+
+
+    <script src="/Content/DaireTemp/js/main.js"></script>
+
+    <script src="~/Content/DaireTemp/js/jquery.singlePageNav.js"></script>
+
+    <script>
+
+        // Prevent console.log from generating errors in IE for the purposes of the demo
+        if (!window.console) console = { log: function () { } };
+
+        // The actual plugin
+        $('#navigation').singlePageNav({
+            offset: $('#navigation').outerHeight(),
+            filter: ':not(.external)',
+            updateHash: true,
+            beforeStart: function () {
+                console.log('begin scrolling');
+            },
+            onComplete: function () {
+                console.log('done scrolling');
+            }
+        });
+    </script>
+</body>
+
+</html>

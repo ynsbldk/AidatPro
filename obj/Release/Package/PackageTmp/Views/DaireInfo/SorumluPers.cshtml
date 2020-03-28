@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AidatPro.Models.PersonelModel>
+
+  
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Personel Ad</th>
+                        <th scope="col">Personel Gorev</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">Personel Mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-row">
+                            <td>@item.PersonelAd</td>
+                            <td>@item.PersonelGorev</td>
+                            <td>@item.Telefon</td>
+                            <td>@item.PersonelMail</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    
+

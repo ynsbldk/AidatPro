@@ -1,0 +1,81 @@
+﻿@model AidatPro.Models.DemirbasModel
+
+@{
+    ViewBag.Title = "Demirbaş Detay";
+    ViewBag.Desc = "Aşağıda ilgili demirbaşa ait bilgiler yer almaktadır.";
+
+}
+<style>
+    .icofont-flora {
+        font-size: 50px;
+    }
+</style>
+
+<div class="row simple-cards users-card">
+    <div class="col-md-12 col-xl-4">
+        <div class="card user-card">
+            <div class="card-header-img">
+                <i class="icofont icofont-flora"></i>
+                <h4><span>Ad:</span> @Model.DemirbasAd</h4>
+                <h6><span>Fiyat:</span> @Model.Fiyat</h6>
+            </div>
+            <br />
+            <h6><span>Alış Tarihi:</span> @Model.AlisTarih.ToString("dddd, dd MMMM yyyy")</h6>
+            <br />
+            <div>
+                <a href="@Url.Action("DemirbasTeslim","Demirbas",new { id=Model.Id})" class="btn btn-danger waves-effect waves-light m-r-15"><i class="icofont icofont-ui-password m-r-5"></i>Teslim Et</a>
+                <a href="#" onclick="fncKaydet(@Model.Id)" class="btn btn-info waves-effect waves-light"><i class="icofont icofont-user m-r-5"></i>Teslim Al</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+      function fncKaydet(id) {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Teslim aldınız mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteTeslim", "Demirbas")',
+                        type: "POST",
+                        cache: false,
+                        data: {"teslimId":id},
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Teslim Alındı",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Demirbaşlar/demirbaş_detay?id=' +@Model.Id;
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Teslim Alınamadı", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Teslim Alınamadı", "error");
+                }
+            })
+
+        }
+</script>

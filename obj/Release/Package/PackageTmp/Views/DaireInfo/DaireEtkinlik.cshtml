@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AidatPro.Models.EtkinlikModel>
+
+
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Konu</th>
+                <th scope="col">Etkinlik</th>
+                <th scope="col">Tarih</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="table-row">
+                    <td>@item.Konu</td>
+                    <td>@item.Mesaj</td>
+                    <td>@item.Tarih.ToString("dddd, dd MMMM yyyy")</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Panel";
+    ViewBag.Desc = "Aşağıda güncel bilgiler listelenmektedir.";
+}
+
+<div class="row">
+    <!-- task, page, download counter  start -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-yellow f-w-600">@ViewBag.ToplamBlok</h4>
+                        <h6 class="text-muted m-b-0">Toplam Blok</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="icofont icofont-building-alt f-28"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-c-yellow">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <a href="@Url.Action("Index","Blok")"><p class="text-white m-b-0">Liste</p></a>
+                    </div>
+                    <div class="col-3 text-right">
+                        <i class="feather icon-trending-up text-white f-16"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-green f-w-600">@ViewBag.ToplamDaire</h4>
+                        <h6 class="text-muted m-b-0">Toplam Daire</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="feather icon-home f-28"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-c-green">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <p class="text-white m-b-0">Güncel</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <i class="feather icon-trending-up text-white f-16"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-pink f-w-600">@ViewBag.ToplamPersonel</h4>
+                        <h6 class="text-muted m-b-0">Toplam Personel</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="icofont icofont-business-man f-28"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-c-pink">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <a href="@Url.Action("Index","Personel")"><p class="text-white m-b-0">Liste</p></a>
+                    </div>
+                    <div class="col-3 text-right">
+                        <i class="feather icon-trending-up text-white f-16"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card">
+            <div class="card-block">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h4 class="text-c-blue f-w-600">@ViewBag.ToplamDemirbas</h4>
+                        <h6 class="text-muted m-b-0">Toplam Demirbaş</h6>
+                    </div>
+                    <div class="col-4 text-right">
+                        <i class="icofont icofont-fix-tools f-28"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-c-blue">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <a href="@Url.Action("Index","Demirbas")"><p class="text-white m-b-0">Liste</p></a>
+                    </div>
+                    <div class="col-3 text-right">
+                        <i class="feather icon-trending-up text-white f-16"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- task, page, download counter  end -->
+
+</div>
+
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h5 class="text-amazon">Kasa Bakiye</h5><br />
+
+    </div>
+    <div class="card-block">
+        @Html.Action("KasaPartial", "Panel")
+
+    </div>
+</div>
+
+<hr />
+<div class="card">
+    <div class="card-header">
+        <h5 class="text-amazon">Blok Bakiye</h5><br />
+
+    </div>
+    <div class="card-block">
+        @Html.Action("AidatPartial", "Panel")
+
+    </div>
+</div>
+
+
+<hr />
+
+<div class="card kasagrafik">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Kasa Toplam Gelir</h5>
+                </div>
+                <div class="card-block text-center">
+                    @Html.Action("ChartPartial", "Panel")
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Kasa Toplam Gider</h5>
+                </div>
+                <div class="card-block text-center">
+                    @Html.Action("ChartGiderPartial", "Panel")
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,63 @@
+﻿@model AidatPro.Models.KasaViewModel
+
+<div class="row">
+    @foreach (var item in Model.Kasa)
+    {
+        var miktar = (Model.KasaBakiye.Where(x => x.KasaId == item.Id).Where(x => x.GiderGelir).Sum(x => x.Bakiye)) - (Model.KasaBakiye.Where(x => x.KasaId == item.Id).Where(x => !x.GiderGelir).Sum(x => x.Bakiye));
+        if (miktar > 0)
+        {
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-green update-card">
+                    <div class="card-block">
+                        <div class="row align-items-end">
+                            <div class="col-8">
+                                <h4 class="text-white">@miktar</h4>
+                                <h6 class="text-white m-b-0">@item.KasaAd</h6>
+                            </div>
+                            <div class="col-4 text-right">
+                                <i class="icofont icofont-briefcase-alt-2 f-50 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-white m-b-0"><i class="icofont icofont-listing-number f-14 m-r-10"></i>Toplam Islem : @Model.KasaBakiye.Where(x => x.KasaId == item.Id).Count()</p>
+                    </div>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-c-pink update-card">
+                    <div class="card-block">
+                        <div class="row align-items-end">
+                            <div class="col-8">
+                                <h4 class="text-white">@miktar</h4>
+                                <h6 class="text-white m-b-0">@item.KasaAd</h6>
+                            </div>
+                            <div class="col-4 text-right">
+                                <i class="icofont icofont-briefcase-alt-2 f-50 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p class="text-white m-b-0"><i class="icofont icofont-listing-number f-14 m-r-10"></i>Toplam Islem : @Model.KasaBakiye.Where(x => x.KasaId == item.Id).Count()</p>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    }
+
+
+
+</div>
+
+
+
+
+
+
+

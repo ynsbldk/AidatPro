@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AidatPro.Models.DemirbasTeslimModel>
+<style>
+    table, th, td {
+        border: 2px solid black !important;
+    }
+
+    th {
+        font-weight: bold !important;
+    }
+</style>
+
+
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Demirbaş</th>
+                    <th scope="col">Teslim Alan</th>
+                    <th scope="col">Teslim Eden</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-row">
+                        <td>@item.Demirs.DemirbasAd</td>
+                        <td>@item.TeslimAlan</td>
+                        <td>@item.TeslimEden</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+

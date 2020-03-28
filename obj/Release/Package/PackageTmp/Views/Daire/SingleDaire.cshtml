@@ -1,0 +1,255 @@
+﻿@model AidatPro.Models.DaireModel
+
+@{
+    ViewBag.Title = "Daire Bilgileri";
+    ViewBag.Desc = "Aşağıda ilgili daireye ait kişisel bilgiler yer almaktadır.";
+
+}
+
+<input type="hidden" value="@Model.BlokId" id="blokId" />
+<input type="hidden" value="@Model.Id" id="daires" />
+
+<!--profile cover start-->
+
+<div class="card">
+    <div class="card-block">
+        <div class="media-left row">
+            <div class="col-xl-9 col-md-9 col-sm-10 col-xs-12">
+                <div class="card social-card bg-info mt-4 w-75">
+                    <div class="card-block">
+                        <div class="row align-items-center">
+                            <div class="col-auto myFo">
+                                @Model.Sahip.Substring(0, 1).ToUpper()
+                            </div>
+                            <div class="col">
+                                <h6 class="m-b-0">Sahibi: @Model.Sahip</h6>
+                                <p>Telefon: @Model.Telefon</p>
+                                <p class="m-b-0">Profil ile ilgili detaylar aşağıda yer almaktadır</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#!" class="download-icon"><i class="feather icon-arrow-down"></i></a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-3 col-sm-2 col-xs-12">
+                <div class="pull-right">
+                    <button id="btnEkle" class="btn btn-info btn-outline-info w-100 mt-4"> <i class="icofont icofont-plus"></i>Borç Ekle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--profile cover end-->
+<div class="row">
+    <div class="col-lg-12">
+        <!-- tab header start -->
+        <div class="tab-header card">
+            <ul class="nav nav-tabs md-tabs tab-timeline" role="tablist" id="mytab">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#personal" role="tab" aria-expanded="true"><i class="icofont icofont-info-circle"></i> Bilgiler</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#binfo" role="tab" aria-expanded="false"><i class="icofont icofont-money"></i> Borç</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#contacts" role="tab" aria-expanded="false"><i class="icofont icofont-edit"></i> Düzenle</a>
+                    <div class="slide"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#review" role="tab" aria-expanded="false"><i class="icofont icofont-interface"></i> Demirbaş</a>
+                    <div class="slide"></div>
+                </li>
+            </ul>
+        </div>
+        <!-- tab header end -->
+        <!-- tab content start -->
+        <div class="tab-content">
+            <!-- tab panel personal start -->
+            <div class="tab-pane active" id="personal" role="tabpanel" aria-expanded="true">
+                <!-- personal card start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-header-text">Hakkında</h5>
+                    </div>
+                    <div class="card-block">
+                        <div class="view-info">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="general-info">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-xl-6">
+                                                <div class="table-responsive">
+                                                    <table class="table m-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Daire Adı</th>
+                                                                <td>@Model.DaireAd</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Daire No</th>
+                                                                <td>@Model.DaireNo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Daire Sahibi</th>
+                                                                <td>@Model.Sahip</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Hane Uye</th>
+                                                                <td>@Model.HaneUye</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">E-Mail</th>
+                                                                <td>@Model.EMail</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- end of table col-lg-6 -->
+                                            <div class="col-lg-12 col-xl-6">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Ev Durumu</th>
+                                                                <td>@Model.EvSahibi</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Telefon</th>
+                                                                <td>@Model.Telefon</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"></th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- end of table col-lg-6 -->
+                                        </div>
+                                        <!-- end of row -->
+                                    </div>
+                                    <!-- end of general info -->
+                                </div>
+                                <!-- end of col-lg-12 -->
+                            </div>
+                            <!-- end of row -->
+                        </div>
+                        <!-- end of view-info -->
+                        <!-- end of edit-info -->
+                    </div>
+                    <!-- end of card-block -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text">Daire ile ilgili notlar</h5>
+                            </div>
+                            <div class="card-block user-desc">
+                                <div class="view-desc">
+                                    <p>@Model.Notlar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- personal card end-->
+            </div>
+            <!-- tab pane personal end -->
+            <!-- tab pane info start -->
+            <div class="tab-pane" id="binfo" role="tabpanel" aria-expanded="false">
+                <!-- info card start -->
+                <div id="unobtrusive">
+                    @Html.Action("DaireBorc", "Daire", new { id = Model.Id })
+                </div>
+                <!-- info card end -->
+            </div>
+            <!-- tab pane info end -->
+            <!-- tab pane contact start -->
+            <div class="tab-pane" id="contacts" role="tabpanel" aria-expanded="false">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <!-- user contact card left side start -->
+                        @Html.Action("UpdateDaire", "Daire", new { id = Model.Id })
+                        <!-- user contact card left side end -->
+                    </div>
+                </div>
+            </div>
+            <!-- tab pane contact end -->
+            <div class="tab-pane" id="review" role="tabpanel" aria-expanded="false">
+                <div class="row">
+                    <div class="col-xl-12">
+                        @Html.Action("DaireAitDemirbas", "Daire", new { daireId = Model.DaireId })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- tab content end -->
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    $(document).ready(function () {
+        $("#btnEkle").click(
+            function () {
+                Swal.fire({
+                    title: "Borç Ekle",
+                    icon: 'question',
+                    text: "Borç miktarını girin",
+                    input: "text",
+                    showCancelButton: true,
+                    closeOnConfirm: true,
+                    closeOnCancel: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Ekle",
+                    confirmButtonColor: "#ec6c62",
+                    cancelButtonText: "Kapat",
+                }).then((result) => {
+                    if (result.value === false)
+                        return false;
+                    if (result.value === "") {
+                        Swal.fire("Oops", "Bir değer girmelisiniz", "error");
+                        return false
+                    }
+                    var borc = result.value;
+                    var blokId = $('#blokId').val();
+                    var ids = $("#daires").val();
+                    $.ajax({
+                        url: '@Url.Action("TekilBorcEkle", "Daire")',
+                        type: "POST",
+                        cache: false,
+                        data: { id: ids, "borc": borc, blokId: blokId }
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Eklendi!",
+                                    text: "Borç Eklendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Daire/tekil_daire?id=' + ids;
+                                })
+                        }
+                        else {
+                            Swal.fire("Oops", "Borç Eklenemedi", "error");
+                        }
+                    }).fail(function () {
+                        Swal.fire("Oops", "Borç Eklenemedi", "error");
+                    })
+                });
+            }
+        );
+    });
+</script>

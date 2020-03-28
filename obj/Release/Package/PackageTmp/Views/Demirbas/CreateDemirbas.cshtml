@@ -1,0 +1,147 @@
+﻿@model AidatPro.Models.DemirbasModel
+@{
+    ViewBag.Title = "Yeni Demirbaş";
+}
+<link href="~/Content/jquery.maxlength.css" rel="stylesheet" />
+<div id="section4">
+    <form id="myForms">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header contact-user">
+                        Yeni Demirbaş bilgilerini ekleyin.
+                    </div>
+                    <div class="card-block">
+                        <div class="form-group row col-md-12">
+                            <label class="col-sm-1 col-form-label">Ad</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="DemirbasAd" required="" id="usernameP" class="form-control form-control-info">
+
+                            </div>
+                            <label class="col-sm-1 col-form-label">Fiyat</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="Fiyat" class="form-control form-control-info">
+                            </div>
+                        </div>
+                        <div class="form-group row col-md-12">
+                            <label class="col-sm-1 col-form-label">Adet</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="Adet" class="form-control form-control-info" required="">
+
+                            </div>
+                            <label class="col-sm-1 col-form-label">Kg</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="Kg" class="form-control form-control-info">
+                            </div>
+                        </div>
+                        <div class="form-group row col-md-12">
+                            <label class="col-sm-1 col-form-label">Alış Tarihi</label>
+                            <div class="col-sm-5">
+                                <input type="date" id="datePicker" name="AlisTarih" class="form-control form-control-info" required="">
+
+                            </div>
+                            <label class="col-sm-1 col-form-label"></label>
+                            <div class="col-sm-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <label class="col-sm-1 col-form-label">Açıklama</label>
+                            <div class="col-sm-12">
+                                <textarea rows="4" name="Aciklama" cols="10" class="form-control form-control-info"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row col-md-12">
+                            <div class="col-md-8"></div>
+                            <div class="col-sm-4">
+                                <input id="clickUpdate" onclick="clickSubmit()" class="form-control btn btn-info float-sm-right" value="Kaydet">
+                            </div>
+                        </div>
+                        <div class="card-block groups-contact">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+
+<script type="text/javascript">
+            function clickSubmit () {
+                Swal.fire({
+                    title: "Uyarı",
+                    text: "Kayıt tamamlandı mı?",
+                    icon: "warning",
+                    contentType: "application/json",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Evet",
+                    confirmButtonColor: "#ec6c62",
+                    confirmButtonText: "Kaydet",
+                }).then((result) => {
+        if (result.value  && $("#myForms").valid()) {
+        $.ajax({
+        url: '@Url.Action("CreateDemirbas", "Demirbas")',
+        data: $('form').serialize(),
+        type: "POST"
+        }).done(function (data) {
+        if (data) {
+        Swal.fire
+        ({
+        title: "Başarılı!",
+        text: "Kayıt Eklendi",
+        icon: "success"
+        }).then(function () {
+        window.location.href = '/Demirbaşlar/demirbaş_listesi';
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+        }
+        }).fail(function () {
+        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+        });
+        }
+        else {
+        Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+        }
+        });
+            }
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                DemirbasAd: {
+                    required: true
+                },
+                Adet: {
+                    required: true
+                },
+                AlisTarih: {
+                    required: true
+                },
+
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+
+

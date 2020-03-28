@@ -1,0 +1,158 @@
+﻿@model AidatPro.Models.DemirbasTeslimModel
+
+@{
+    ViewBag.Title = "Demirbaş Teslim Et";
+    ViewBag.Desc = "Teslim etmek istediğiniz daire bilgilerini girin";
+}
+
+
+<form id="myForms">
+    <input type="hidden" name="DemirbasId" value="@Model.Demirs.Id" />
+    <div class="card">
+        <div class="card-block">
+            <div class="card-header-text">
+                <div class="text-amazon">@Model.Demirs.DemirbasAd</div>
+            </div>
+            <div class="form-group row  mt-5">
+                <label class="col-md-2 col-sm-2 col-xs-2 col-form-label">Blok</label>
+                <div class="col-md-7">
+                    @Html.DropDownListFor(x => x.BlokId, new SelectList(ViewBag.blokDropdown, "Id", "BlokAd"), new { @class = "js-example-basic-single", id = "bloksid" })
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label class="col-md-2 col-sm-2 col-xs-2 col-form-label">Daire</label>
+                <div class="col-md-7">
+                    @Html.DropDownListFor(x => x.DaireId, new SelectList(ViewBag.daireDropdown, "Id", "DaireAd"), new { @class = "js-example-basic-single", id = "dairesid" })
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label class="col-md-2 col-sm-2 col-xs-2">Teslim Tarihi</label>
+                <div class="col-sm-7">
+                    <input type="date" id="datePicker" name="EklenmeTarih" required="" value="@DateTime.Now" class="form-control form-control-info">
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label class="col-md-2 col-sm-2 col-xs-2">Teslim Alan</label>
+                <div class="col-md-7">
+                    <input type="text" name="TeslimAlan" required="" class="form-control form-control-info">
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label class="col-md-2 col-sm-2 col-xs-2">Teslim Eden</label>
+                <div class="col-md-7">
+                    <input type="text" name="TeslimEden" required="" class="form-control form-control-info">
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <div class="col-md-2"></div>
+                <div class="col-sm-7">
+                    <a href="#" onclick="fncKaydet()" class="form-control btn btn-info float-sm-right w-50">Kaydet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+    <script src="~/Theme/files/bower_components/select2/js/select2.full.min.js"></script>
+    <script src="~/Theme/files/assets/pages/advance-elements/select2-custom.js"></script>
+
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+                       
+            $("#bloksid").change(function () {
+            var ids = $(this).val();
+            var dairelist = $("#dairesid");
+            dairelist.empty();
+            $.ajax({
+                url: '@Url.Action("DaireList", "Demirbas")',
+                type: 'POST',
+                datatype: 'json',
+                data: { 'id': ids },
+                success: function (data) {
+                    $.each(data, function (index, option) {
+                        dairelist.append('<option value=' + option.Value + '>' + option.Text + '</option>');
+
+                    });
+                }
+            });
+
+          });
+
+        });
+
+</script>
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Yeni kayıt tamamlandı mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#myForms").valid()) {
+                    $.ajax({
+                        url: '@Url.Action("DemirbasTeslim", "Demirbas")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Kayıt Eklendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Demirbaşlar/demirbaş_detay?id='+ @Model.Demirs.Id;
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                TeslimAlan: {
+                    required: true
+                },
+                TeslimEden: {
+                    required: true
+                },
+                EklenmeTarih: {
+                    required: true
+                }
+
+            }
+        });
+    });
+
+</script>

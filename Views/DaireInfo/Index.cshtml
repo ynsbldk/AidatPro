@@ -1,0 +1,110 @@
+﻿@model IEnumerable<AidatPro.Models.AidatModel>
+@{
+    Layout = "~/Views/Shared/DaireLayout.cshtml";
+}
+
+<style>
+    table, th, td {
+        border: 2px solid black;
+    }
+
+</style>
+
+<!-- slider_area_start -->
+<div class="slider_area" id="section1">
+    <div class="single_slider  d-flex align-items-center slider_bg_1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-md-6">
+                    <div class="slider_text">
+                        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">@ViewBag.Bloks</h5>
+                        <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">@ViewBag.Daires</h3>
+                        <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">Aşağıda daire ve bloğunuza ait bilgiler yer almaktadır</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ilstration_img wow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
+        <img src="img/banner/illustration.png" alt="">
+    </div>
+</div>
+
+<div class="footer" style="background-color: #27b6ff; color: white;" id="section2">
+    <div class="footer_top">
+        <div class="container text-center">
+            <br />
+            <h3 style="color:white;">Borç Bilgi Listesi</h3><br />
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Borç</th>
+                        <th scope="col">Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-row">
+                            <td>@item.Borc</td>
+                            @if (item.Odeme)
+                            {
+                                <td>Odendi</td>
+                            }
+                            else
+                            {
+                                <td style="color:#000000">Odenmedi</td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer" style="background-color:#ff6a00; color:white;" id="section3">
+    <div class="footer_top">
+        <div class="container text-center">
+            <br />
+            <h3 style="color:white;">Planlanan Etkinlik Listesi</h3><br />
+            @Html.Action("DaireEtkinlik", "DaireInfo")
+        </div>
+    </div>
+</div>
+
+<div class="footer" style="background-color:#ffd800; color:black;" id="section4">
+    <div class="footer_top">
+        <div class="container text-center">
+            <br />
+            <h3 style="color:black;">Teslim Aldığınız Demirbaş Listesi</h3><br />
+            @Html.Action("DaireDemirbas", "DaireInfo")
+        </div>
+    </div>
+</div>
+
+<div class="footer" style="background-color:#00ff21; color:white;" id="section5">
+    <div class="footer_top">
+        <div class="container text-center">
+            <br />
+            <h3 style="color:white;">Bloğunuzdaki Sorumlu Personel</h3><br />
+            @Html.Action("SorumluPers", "DaireInfo")
+        </div>
+    </div>
+</div>
+
+<div class="footer" style="background-color:transparent;" id="section6">
+    <div class="footer_top">
+        <div class="container">
+            <br />
+            <h3 style="color:black;" class="text-center">Yoneticiye Mesaj Gönderin</h3><br />
+            @Html.Action("Iletisim", "DaireInfo")
+        </div>
+    </div>
+</div>
+
+
+

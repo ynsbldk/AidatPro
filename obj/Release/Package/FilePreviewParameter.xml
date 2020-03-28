@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="aidat-takip" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Comp\\Desktop\\AidatPro\\AidatPro\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Comp\\Desktop\\AidatPro\\AidatPro\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="AidatPro-Web.config Connection String" description="" value="Server=aidat-pro.database.windows.net,1433;Initial Catalog=AidatPro;Persist Security Info=False;User ID=aidatpro;Password=Yunus?772;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Comp\\Desktop\\AidatPro\\AidatPro\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AidatPro']/@connectionString" />
+  </parameter>
+</parameters>

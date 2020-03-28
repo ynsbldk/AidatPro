@@ -1,0 +1,121 @@
+﻿@model AidatPro.Models.KasaModel
+@{
+    ViewBag.Title = "Yeni Kasa";
+}
+
+<form id="myForms">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header contact-user">
+                    Yeni Kasa bilgilerini ekleyin.
+                </div>
+                <div class="card-block">
+
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-3 col-form-label">Ad</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="KasaAd" required="" class="form-control form-control-info">
+                            <span class="form-bar"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-3 col-form-label">Sorumlu Personel</label>
+                        <div class="col-sm-9">
+                            @Html.DropDownListFor(x => x.SorumluPersonelId, new SelectList(ViewBag.SPersonel, "Id", "PersonelAd"), new { @class = "js-example-basic-single", id = "persid" })
+                        </div>
+                    </div>
+                    <div class="form-group row col-md-12">
+                        <label class="col-sm-3 col-form-label">Not</label>
+                        <div class="col-sm-9">
+                            <textarea rows="4" name="Not" cols="10" class="form-control form-control-info"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-12">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-4">
+                            <span onclick="fncKaydet()" id="btnKaydet" class="form-control btn btn-info float-sm-right"><i class="icofont icofont-info-square"></i>Kaydet</span>
+                        </div>
+                    </div>
+
+                    <div class="card-block groups-contact">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+
+    <script src="~/Theme/files/bower_components/select2/js/select2.full.min.js"></script>
+    <script src="~/Theme/files/assets/pages/advance-elements/select2-custom.js"></script>
+
+}
+
+<script>
+      function fncKaydet() {
+            Swal.fire({
+                title: "Uyarı",
+                text: "Yeni kayıt tamamlandı mı?",
+                icon: "warning",
+                contentType: "application/json",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Evet",
+                confirmButtonColor: "#ec6c62",
+                cancelButtonText: "Iptal",
+            }).then((result) => {
+                if (result.value && $("#myForms").valid()) {
+                    $.ajax({
+                        url: '@Url.Action("CreateKasa", "Kasa")',
+                        type: "POST",
+                        cache: false,
+                        data: $('form').serialize(),
+                        traditional: true
+                    }).done(function (data) {
+                        if (data) {
+                            Swal.fire
+                                ({
+                                    title: "Başarılı!",
+                                    text: "Kayıt Eklendi",
+                                    icon: "success"
+                                }).then(function () {
+                                    window.location.href = '/Kasa/Kasa_Listesi';
+                                });
+                        }
+                        else {
+                            Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                        }
+                    }).fail(function (data) {
+                        Swal.fire("Oops", "Server tarafında hata oluştu.", "error");
+                    });
+                }
+                else {
+                    Swal.fire("Oops", "Kayıt Eklenemedi", "error");
+                }
+            })
+
+        }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#myForms').validate({ // initialize the plugin
+            errorClass: 'errors',
+            rules: {
+                KasaAd: {
+                    required: true
+                }
+            }
+        });
+    });
+</script>

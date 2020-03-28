@@ -1,0 +1,160 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+
+    <title>@ViewBag.Title</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="#">
+    <meta name="keywords" content="site aidat takip, apartman yönetimi , aidat, aylık takip, apartman, aidat uygulama, yazılım, aidat programı, mobil aidat takip, apartman, site, apartman aidatları">
+    <meta name="author" content="#">
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Theme/files/assets/images/favs.png" type="image/png">
+    <!-- <link rel="manifest" href="/Content/HomeTemp/site.webmanifest"> -->
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="/Content/HomeTemp/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/magnific-popup.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/themify-icons.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/nice-select.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/flaticon.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/gijgo.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/animate.min.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/slick.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/slicknav.css">
+    <link rel="stylesheet" href="/Content/HomeTemp/css/style.css">
+    <!-- <link rel="stylesheet" href="/Content/HomeTemp/css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="/Content/HomeTemp/https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-2">
+                            <div class="logo">
+                                <a href="@Url.Action("Anasayfa","Home")">
+                                    <img src="/Content/HomeTemp/img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a class="active" href="#section1">Anasayfa</a></li>
+                                        <li><a href="#section2">Özellikler</a></li>
+                                        <li><a href="#section3">Hakkımızda</a></li>
+                                        <li><a href="#section4">Bize Yazın</a></li>
+                                        <li><a href="#section5" target="_blank" id="dok">Dökümasyon</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 d-lg-block">
+                            <div class="Appointment">
+                                <div class="book_btn d-lg-block">
+                                    <a href="@Url.Action("Login","Account")" target="_blank" class="btnMini">Giriş Yap</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+    @RenderBody()
+    <!-- footer start -->
+    <div class="features_area " id="section4">
+        @Html.Action("Iletisim", "Home")
+
+    </div>
+    <div class="copy-right_text">
+        <div class="container">
+            <div class="footer_border"></div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <p class="copy_right text-center">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> TÜM HAKLARI SAKLIDIR
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--/ footer end  -->
+    <!-- JS here -->
+    <script src="/Content/HomeTemp/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/Content/HomeTemp/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/Content/HomeTemp/js/popper.min.js"></script>
+    <script src="/Content/HomeTemp/js/bootstrap.min.js"></script>
+    <script src="/Content/HomeTemp/js/owl.carousel.min.js"></script>
+    <script src="/Content/HomeTemp/js/isotope.pkgd.min.js"></script>
+    <script src="/Content/HomeTemp/js/ajax-form.js"></script>
+    <script src="/Content/HomeTemp/js/waypoints.min.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.counterup.min.js"></script>
+    <script src="/Content/HomeTemp/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/Content/HomeTemp/js/scrollIt.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.scrollUp.min.js"></script>
+    <script src="/Content/HomeTemp/js/wow.min.js"></script>
+    <script src="/Content/HomeTemp/js/nice-select.min.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.slicknav.min.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.magnific-popup.min.js"></script>
+    <script src="/Content/HomeTemp/js/plugins.js"></script>
+    <script src="/Content/HomeTemp/js/gijgo.min.js"></script>
+
+    <!--contact js-->
+    <script src="/Content/HomeTemp/js/contact.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.form.js"></script>
+    <script src="/Content/HomeTemp/js/jquery.validate.min.js"></script>
+    <script src="/Content/HomeTemp/js/mail-script.js"></script>
+
+    <script src="/Content/HomeTemp/js/main.js"></script>
+
+    <script src="~/Content/DaireTemp/js/jquery.singlePageNav.js"></script>
+
+    <script>
+
+        // Prevent console.log from generating errors in IE for the purposes of the demo
+        if (!window.console) console = { log: function () { } };
+
+        // The actual plugin
+        $('#navigation').singlePageNav({
+            offset: $('#navigation').outerHeight(),
+            filter: ':not(.external)',
+            updateHash: true,
+            beforeStart: function () {
+                console.log('begin scrolling');
+            },
+            onComplete: function () {
+                console.log('done scrolling');
+            }
+        });
+
+        $('#dok').click(function () {
+            window.open('@Url.Action("Dokumasyon","Home")', '_blank');
+        }
+        );
+
+
+    </script>
+</body>
+</html>
